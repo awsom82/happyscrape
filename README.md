@@ -5,7 +5,7 @@ Scrape the web, but only for demo purposes! Don't be bad.
 Just execute in terminal `git clone github.com/awsom82/happyscrape && cd happyscrape`
 and run command `go build ./cmd/happyscrape && ./happyscrape`.
 
-This will run conversion http service at port 8080.
+This will run http scrape service at port 8080.
 
 ## Using
 After your run this app, you should able to send any JSON file to `http://localhost:8080/`.
@@ -13,7 +13,7 @@ After your run this app, you should able to send any JSON file to `http://localh
 Notice, there no specific path for JSON. The application will detect an input type of file by a mime-type header, or if it lacks that info. It will try to detect that by file signature [MIME Sniffing](https://mimesniff.spec.whatwg.org)
 
 ### Configuration
-You can just type `./happyscrape --help` to get help message.
+You can just type `./happyscrape -h` to get help message.
 ```
 Usage of ./happyscrape:
 
