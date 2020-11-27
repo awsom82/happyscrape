@@ -57,16 +57,13 @@ func ScrapeLinks(ctx context.Context, links []Link) ([]Link, error) {
 		case <-ctx.Done():
 			return nil, fmt.Errorf("Aborted by client...")
 		case link, ok := <-parsed:
-			results = append(results, link)
 			if !ok {
 				return results, nil
 			}
+			results = append(results, link)
 		}
 	}
 
-	//res := returnResults(parsed)
-
-	//return res, nil
 }
 
 func processLink(ctx context.Context, parsed chan<- Link, tokens <-chan struct{}, wg *sync.WaitGroup, link Link, errch chan<- error) {

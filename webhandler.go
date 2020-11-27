@@ -69,7 +69,7 @@ func ParserHandler(w http.ResponseWriter, r *http.Request) {
 		// Scrape data
 		res, err := ScrapeLinks(r.Context(), links)
 		if err != nil {
-			err = fmt.Errorf("[HappyScrape] %w: %w", ErrWhileScraping, err)
+			err = fmt.Errorf("[HappyScrape] %w: %s", ErrWhileScraping, err)
 			log.Println(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -77,7 +77,7 @@ func ParserHandler(w http.ResponseWriter, r *http.Request) {
 
 		js, err := json.Marshal(res)
 		if err != nil {
-			err = fmt.Errorf("[HappyScrape] %w: %w", ErrWhileMarshaling, err)
+			err = fmt.Errorf("[HappyScrape] %w: %s", ErrWhileMarshaling, err)
 			log.Println(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
