@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-var requestTimeout time.Duration = 15 * time.Second
+var requestTimeout time.Duration = 500 * time.Millisecond
 
 // tokens limits active outbound connections
 var tokens chan struct{}

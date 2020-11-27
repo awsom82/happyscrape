@@ -24,7 +24,7 @@ The application will detect an input type of file by a mime-type header.
 If it lacks that info, it will try to detect that by file signature.
 
 Examples:
-> http :8080 Content-type:application/json < links.json
+> http :8080 Content-type:application/json < example.json
 
 Version:
   Build NOBUILD at 0

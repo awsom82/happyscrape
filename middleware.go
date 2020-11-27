@@ -12,10 +12,13 @@ const (
 	WarningColor = "\033[1;33m%s\033[0m" + endString
 )
 
-// ScrapeLogMiddleware logs http requests
-func ScrapeLogMiddleware(next http.Handler) http.Handler {
+// ScrapeLogMiddleware req limiter and logs http requests
+func ScrapeLogMiddleware(next http.Handler, concurrentReqs int) http.Handler {
+	sem := make(chan struct{}, concurrentReqs)
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		sem <- struct{}{}
+		defer func() { <-sem }()
 
 		color := InfoColor
 
