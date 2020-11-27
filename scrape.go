@@ -1,7 +1,6 @@
 package happyscrape
 
 import (
-	//"encoding/json"
 	"bytes"
 	"context"
 	"encoding/base64"
@@ -107,7 +106,3 @@ func processLink(ctx context.Context, parsed chan<- Link, tokens <-chan struct{}
 
 	parsed <- link
 }
-
-// func returnResults(parsed <-chan Link) []Link {
-//
-// }

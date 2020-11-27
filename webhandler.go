@@ -10,7 +10,7 @@ import (
 	"net/http"
 )
 
-var maxLinks int = 20 // MaxLinks
+var maxLinks int = 20 // maximum links per request
 
 var (
 	ErrPayload         = errors.New("Bad payload")
