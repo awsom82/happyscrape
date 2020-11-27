@@ -29,7 +29,8 @@ Examples:
 Version:
   Build NOBUILD at 0
 
-2020 MIT License © Igor A. Melekhine
+Author:
+  Igor A. Melekhine – 2020 © MIT License
 
   -hostname string
     	Bind server address (default "localhost")
@@ -41,6 +42,8 @@ Version:
     	Max simultaneous requests (default 100)
   -outbound-conn int
     	Max outbound requests (default 5)
+  -outbound-timeout duration
+    	Timeout for outgoing requests (default 500ms)
   -port int
     	Port number (default 8080)
   -read-timeout duration
@@ -55,3 +58,10 @@ Version:
 ```
 $ http :8080 Content-type:application/json < example.json
 ```
+
+### wrk
+Good start point for testing is run app with next keys:
+
+`./happyscrape -outbound-timeout 8s`.
+
+Use `wrk -t1 -c8 -d30s -s wrkpayload.lua http://localhost:8080/` for simply load test

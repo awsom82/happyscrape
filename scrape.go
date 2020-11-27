@@ -53,7 +53,7 @@ func ScrapeLinks(ctx context.Context, links []Link) ([]Link, error) {
 	for {
 		select {
 		case err := <-errch:
-			return nil, fmt.Errorf("Abort by fetch error: %s", ErrWhileScraping, err)
+			return nil, fmt.Errorf("Abort by fetch error: %s: %s", ErrWhileScraping, err)
 		case <-ctx.Done():
 			return nil, fmt.Errorf("Aborted by client...")
 		case link, ok := <-parsed:
@@ -92,7 +92,7 @@ func processLink(ctx context.Context, parsed chan<- Link, tokens <-chan struct{}
 	<-tokens
 
 	if resp.StatusCode != 200 {
-		err = fmt.Errorf("[HappyScrape] Bad resp code %d for %s", resp.StatusCode, link.URL)
+		err = fmt.Errorf("Bad resp code %d for %s", resp.StatusCode, link.URL)
 		errch <- err
 		return
 	}

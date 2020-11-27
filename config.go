@@ -18,7 +18,7 @@ type Config struct {
 }
 
 func NewConfig() *Config {
-	return &Config{"localhost", 8080, 20, 100, 5, 15e9, false, 5e9, 5e8, 5e9}
+	return &Config{"localhost", 8080, 20, 100, 5, 5e8, false, 5e9, 10e9, 5e9}
 }
 
 // Init must be called before server run

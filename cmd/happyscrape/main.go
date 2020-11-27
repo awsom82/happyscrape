@@ -36,7 +36,7 @@ If it lacks that info, it will try to detect that by file signature.
 Examples:
 > http :8080 Content-type:application/json < links.json`
 
-	appVersion := fmt.Sprintf("Version:\n  Build %s at %s\n\nAuthor:\n  Igor A. Melekhine © 2020 MIT License\n\n", strings.ToUpper(gitHash[:7]), gitTime)
+	appVersion := fmt.Sprintf("Version:\n  Build %s at %s\n\nAuthor:\n  Igor A. Melekhine – 2020 © MIT License\n\n", strings.ToUpper(gitHash[:7]), gitTime)
 
 	fmt.Fprintf(flag.CommandLine.Output(), "Usage of %s:\n\n"+useText+"\n\n"+appVersion, os.Args[0])
 	flag.PrintDefaults()
