@@ -6,5 +6,5 @@ function readAll(file)
 end
 
 wrk.method = "POST"
-wrk.body = readAll("links.json")
+wrk.body = readAll("example.json")
 wrk.headers["Content-Type"] = "application/json"
