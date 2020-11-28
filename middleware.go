@@ -8,8 +8,8 @@ import (
 // Log colors
 const (
 	endString    = " %0.2f kB \u2192 %s"
-	InfoColor    = "\033[1;34m%s\033[0m" + endString
-	WarningColor = "\033[1;33m%s\033[0m" + endString
+	InfoColor    = "[HappyScrape] \033[1;34m%s\033[0m" + endString
+	WarningColor = "[HappyScrape] \033[1;33m%s\033[0m" + endString
 )
 
 // ScrapeLogMiddleware req limiter and logs http requests
