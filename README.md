@@ -17,11 +17,11 @@ You can just type `./happyscrape -h` to get help message.
 ```
 Usage of ./happyscrape:
 
-You should able to send JSON file localhost:8080.
+You should be able send JSON payloads to localhost:8080.
 Notice, there no specific path for JSON, you may use any.
 
-The application will detect an input type of file by a mime-type header.
-If it lacks that info, it will try to detect that by file signature.
+The application will detect an input type by a mime-type header.
+If it lacks that data, it will try to detect that by file signature.
 
 Examples:
 > http :8080 Content-type:application/json < example.json
@@ -30,7 +30,7 @@ Version:
   Build NOBUILD at 0
 
 Author:
-  Igor A. Melekhine – 2020 © MIT License
+  Igor A. Melekhine — 2020 © MIT License
 
   -hostname string
     	Bind server address (default "localhost")
@@ -43,13 +43,13 @@ Author:
   -outbound-conn int
     	Max outbound requests (default 5)
   -outbound-timeout duration
-    	Timeout for outgoing requests (default 500ms)
+    	Outgoing requests timeout (default 500ms)
   -port int
     	Port number (default 8080)
   -read-timeout duration
     	HTTP Read timeout (default 5s)
   -shutdown-timeout duration
-    	Seconds to complete requests before shutdown (default 5s)
+    	Timeout to complete requests before shutdown (default 5s)
   -write-timeout duration
     	HTTP Write timeout (default 10s)
 ```

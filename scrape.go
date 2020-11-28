@@ -54,7 +54,7 @@ func ScrapeLinks(ctx context.Context, links []Link) ([]Link, error) {
 		case err := <-errch:
 			return nil, fmt.Errorf("Abort by fetch error: %s: %s", ErrWhileScraping, err)
 		case <-ctx.Done():
-			return nil, fmt.Errorf("Aborted by client...")
+			return nil, fmt.Errorf("Aborted...")
 		case link, ok := <-parsed:
 			if !ok {
 				return results, nil
