@@ -10,6 +10,8 @@ import (
 	"net/http"
 )
 
+const maxBodyBytes = int64(65536) // limit payload to 64kb
+
 var maxLinks int = 20 // maximum links per request
 
 var (
@@ -27,7 +29,9 @@ func ParserHandler(w http.ResponseWriter, r *http.Request) {
 		var payload bytes.Buffer
 		var links []Link
 
-		// Copy error
+		// Copy payload
+		r.Body = http.MaxBytesReader(w, r.Body, maxBodyBytes)
+
 		_, err = io.Copy(&payload, r.Body)
 		if err != nil {
 			err = fmt.Errorf("[HappyScrape] %w: %s", ErrPayload, "Input load error: Data not provided or corrupted")
