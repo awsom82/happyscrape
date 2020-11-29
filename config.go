@@ -14,19 +14,20 @@ type Config struct {
 	KeepAlive            bool
 	ReadTimeout          time.Duration
 	WriteTimeout         time.Duration
+	ConnTimeout          time.Duration
 	ShutdownTimeout      time.Duration // number of time to complete existing requests before shutdown
 }
 
 func NewConfig() *Config {
-	return &Config{"localhost", 8080, 20, 100, 5, 5e8, false, 5e9, 10e9, 5e9}
+	return &Config{"localhost", 8080, 20, 100, 5, 5e8, false, 5e9, 8e9, 10e9, 15e9}
 }
 
 // Init must be called before server run
 func (c *Config) Init() {
-	tokens = make(chan struct{}, c.MaxConcurrentReqs) // max concurrent requests
+	tokens = make(chan struct{}, c.MaxConcurrentReqs) // max concurrent requests as client
 	maxLinks = c.LinksLimit
 	requestTimeout = c.ClientRequestTimeout
-	requests = make(chan struct{}, c.SimultaneousReqs)
+	requests = make(chan struct{}, c.SimultaneousReqs) // max inbound requests
 }
 
 // Close uncessary but let it be

@@ -19,7 +19,7 @@ func NewServer(conf *Config) *http.Server {
 		ReadTimeout:  conf.ReadTimeout,
 		WriteTimeout: conf.WriteTimeout,
 		// add middleware to see requests and limit by set simply timeout
-		Handler: http.TimeoutHandler(ScrapeLogMiddleware(h), conf.WriteTimeout, "Timeout!\n"),
+		Handler: http.TimeoutHandler(ScrapeLogMiddleware(h), conf.ConnTimeout, "Request timeout"),
 	}
 
 	srv.SetKeepAlivesEnabled(conf.KeepAlive)

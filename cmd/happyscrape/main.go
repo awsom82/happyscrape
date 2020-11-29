@@ -53,6 +53,7 @@ func main() {
 	flag.BoolVar(&conf.KeepAlive, "keep-alive", conf.KeepAlive, "HTTP Keep-Alive")
 	flag.DurationVar(&conf.ReadTimeout, "read-timeout", conf.ReadTimeout, "HTTP Read timeout")
 	flag.DurationVar(&conf.WriteTimeout, "write-timeout", conf.WriteTimeout, "HTTP Write timeout")
+	flag.DurationVar(&conf.ConnTimeout, "conn-timeout", conf.ConnTimeout, "HTTP Connection timeout")
 	flag.DurationVar(&conf.ShutdownTimeout, "shutdown-timeout", conf.ShutdownTimeout, "Timeout to complete requests before shutdown")
 
 	flag.Parse()

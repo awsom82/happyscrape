@@ -26,18 +26,13 @@ func ScrapeLogMiddleware(next http.Handler) http.Handler {
 			if r.Method != "POST" {
 				color = WarningColor
 			}
-
 			log.Printf(color, r.Method, float64(r.ContentLength)/1024.0, r.URL.Path)
 
 			next.ServeHTTP(w, r)
 
-		//	})
-
 		default:
-			// return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			log.Println("LIMIT:", r.URL.Path)
 			http.Error(w, http.StatusText(http.StatusTooManyRequests), http.StatusTooManyRequests)
-
 		}
 	})
 
