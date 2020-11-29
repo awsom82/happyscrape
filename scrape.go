@@ -43,7 +43,7 @@ func ScrapeLinks(ctx context.Context, links []Link) ([]Link, error) {
 		for _, link := range links {
 			tokens <- struct{}{}
 			wg.Add(1)
-			go processLink(ctxCancel, parsed, tokens, &wg, link, errch)
+			go processLink(ctxCancel, parsed, &wg, link, errch)
 		}
 		wg.Wait()
 		close(parsed)
@@ -65,7 +65,7 @@ func ScrapeLinks(ctx context.Context, links []Link) ([]Link, error) {
 
 }
 
-func processLink(ctx context.Context, parsed chan<- Link, tokens <-chan struct{}, wg *sync.WaitGroup, link Link, errch chan<- error) {
+func processLink(ctx context.Context, parsed chan<- Link, wg *sync.WaitGroup, link Link, errch chan<- error) {
 	var err error
 	var data bytes.Buffer
 	defer wg.Done()
