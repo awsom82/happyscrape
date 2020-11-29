@@ -18,7 +18,8 @@ func NewServer(conf *Config) *http.Server {
 		Addr:         fmt.Sprintf("%s:%d", conf.Hostname, conf.Port),
 		ReadTimeout:  conf.ReadTimeout,
 		WriteTimeout: conf.WriteTimeout,
-		Handler:      http.TimeoutHandler(ScrapeLogMiddleware(h, conf.SimultaneousReqs), conf.WriteTimeout, "Timeout!\n"), // add middleware to see requests and limit by set simply timeout
+		// add middleware to see requests and limit by set simply timeout
+		Handler: http.TimeoutHandler(ScrapeLogMiddleware(h), conf.WriteTimeout, "Timeout!\n"),
 	}
 
 	srv.SetKeepAlivesEnabled(conf.KeepAlive)

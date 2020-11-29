@@ -26,6 +26,7 @@ func (c *Config) Init() {
 	tokens = make(chan struct{}, c.MaxConcurrentReqs) // max concurrent requests
 	maxLinks = c.LinksLimit
 	requestTimeout = c.ClientRequestTimeout
+	requests = make(chan struct{}, c.SimultaneousReqs)
 }
 
 // Close uncessary but let it be

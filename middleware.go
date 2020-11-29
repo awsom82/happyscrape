@@ -12,22 +12,33 @@ const (
 	WarningColor = "[HappyScrape] \033[1;33m%s\033[0m" + endString
 )
 
+var requests chan struct{}
+
 // ScrapeLogMiddleware req limiter and logs http requests
-func ScrapeLogMiddleware(next http.Handler, concurrentReqs int) http.Handler {
-	sem := make(chan struct{}, concurrentReqs)
+func ScrapeLogMiddleware(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		sem <- struct{}{}
-		defer func() { <-sem }()
+		select {
+		case requests <- struct{}{}:
+			defer func() { <-requests }()
 
-		color := InfoColor
+			color := InfoColor
+			if r.Method != "POST" {
+				color = WarningColor
+			}
 
-		if r.Method != "POST" {
-			color = WarningColor
+			log.Printf(color, r.Method, float64(r.ContentLength)/1024.0, r.URL.Path)
+
+			next.ServeHTTP(w, r)
+
+		//	})
+
+		default:
+			// return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			log.Println("LIMIT:", r.URL.Path)
+			http.Error(w, http.StatusText(http.StatusTooManyRequests), http.StatusTooManyRequests)
+
 		}
-
-		log.Printf(color, r.Method, float64(r.ContentLength)/1024.0, r.URL.Path)
-
-		next.ServeHTTP(w, r)
 	})
+
 }
